@@ -126,7 +126,7 @@ class Map extends Component {
           marker.bar = bar;
 
           this.props.markers.push(marker);
-          
+
           const infoWindowContent = `
             <div>${bar.name}</div>
             <div>Rating: ${bar.rating}</div>
