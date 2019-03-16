@@ -1,25 +1,25 @@
 import React, { Component } from "react";
 
 class Map extends Component {
-  /*constructor(props) {
+  constructor(props) {
     super(props);
 
-    this.map = null;
-    this.currentLocationCircle = null;
-    this.currentToTargetLocationLine = null;
-
     this.initMap = () => {
-      this.map = new window.google.maps.Map(document.getElementById("map"), {
-        center: {lat: this.props.currentLocation.latitude - 0.0015, lng: this.props.currentLocation.longitude},
-        zoom: 16,
-        mapTypeId: "roadmap",
-        disableDefaultUI: true,
-        gestureHandling: "greedy"
-      });
+      if (window.google) {
+        this.map = new window.google.maps.Map(document.getElementById("map"), {
+          center: {lat: -37.813762, lng: 144.970467},
+          zoom: 16,
+          mapTypeId: "roadmap",
+          disableDefaultUI: true,
+          gestureHandling: "greedy"
+        });
+      } else {
+        setTimeout(this.initMap, 200);
+      }
     };
 
     this.refreshMap = () => {
-      const targetLocationLatLng = new google.maps.LatLng(
+      /*const targetLocationLatLng = new google.maps.LatLng(
         this.props.targetLocation.latitude,
         this.props.targetLocation.longitude
       );
@@ -69,11 +69,11 @@ class Map extends Component {
         position: homeLocationLatLng,
         map: this.map,
         icon: "assets/images/icon-home.svg"
-      });
+      });*/
     };
 
     this.updateMap = () => {
-      const targetLocationLatLng = new google.maps.LatLng(
+      /*const targetLocationLatLng = new google.maps.LatLng(
         this.props.targetLocation.latitude,
         this.props.targetLocation.longitude
       );
@@ -93,21 +93,21 @@ class Map extends Component {
 
       this.currentLocationCircle.setOptions({center: currentLocationLatLng});
       this.currentToTargetLocationLine.setOptions({path: lineCoords});
-      this.map.panTo({lat: this.props.currentLocation.latitude - 0.0015, lng: this.props.currentLocation.longitude});
+      this.map.panTo({lat: this.props.currentLocation.latitude - 0.0015, lng: this.props.currentLocation.longitude});*/
     }
   }
 
   componentDidMount() {
-    this.initMap();
-    this.refreshMap();
+    window.setTimeout(this.initMap, 200);
+    //this.refreshMap();*/
   }
 
   componentDidUpdate(prevProps) {
-    if (JSON.stringify(prevProps.currentLocation) !== JSON.stringify(this.props.currentLocation)) { //calling stringify every render - bad idea?
+   /* if (JSON.stringify(prevProps.currentLocation) !== JSON.stringify(this.props.currentLocation)) { //calling stringify every render - bad idea?
       console.log(prevProps, this.props);
       this.updateMap();
-    }
-  }*/
+    }*/
+  }
 
   render() {
     return <div id="map" />;
