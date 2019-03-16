@@ -1,0 +1,108 @@
+{
+    "bands": [{
+            "name": "Monash Philharmonic Orchestra",
+            "description": "",
+            "practiceLocation": {
+                "lat": -37.909256,
+                "lng": 145.132224
+            },
+            "type": "Orchestra",
+            "seekingInstruments": [
+                "Viola",
+                "Double Bass",
+                "Cello",
+                "Trombone"
+            ],
+            "desiredExperience": "All",
+            "email": "info@monashphil.org",
+            "website": "https://monashphil.org/"
+        },
+        {
+            "name": "Manningham Concert Band",
+            "description": "",
+            "practiceLocation": {
+                "lat": -37.814536,
+                "lng": 145.009917
+            },
+            "type": "Band",
+            "seekingInstruments": [
+                "Trumpet",
+                "Trombone",
+                "Oboe"
+            ],
+            "desiredExperience": "Intermediate",
+            "email": "questions@hotmail.com",
+            "website": "https://manninghamband.org.au/"
+        },
+        {
+            "name": "Boroondara Symphonic Band",
+            "description": "",
+            "practiceLocation": {
+                "lat": -37.833530, 
+                "lng": 145.042660
+            },
+            "type": "Band",
+            "seekingInstruments": [
+                "Clarinet",
+                "Tuba",
+                "Oboe",
+                "French Horn"
+            ],
+            "desiredExperience": "Beginner",
+            "email": "president@bsb.com.au",
+            "website": "https://www.boroondarasymphonicband.org.au/"
+        },
+        {
+            "name": "Melbourne String Ensemble",
+            "description": "",
+            "practiceLocation": {
+                "lat": -37.834322, 
+                "lng": 145.029099
+            },
+            "type": "String Ensemble",
+            "seekingInstruments": [
+                "Violin",
+                "Viola",
+                "Cello",
+                "Double Bass"
+            ],
+            "desiredExperience": "Advanced",
+            "email": "info@mse.org.au",
+            "website": "https://mse.org.au/"
+        },
+        {
+            "name": "Australian String Quartet",
+            "description": "",
+            "practiceLocation": {
+                "lat": -37.835451, 
+                "lng": 144.963997
+            },
+            "type": "String Quartet",
+            "seekingInstruments": [
+                "Cello"
+            ],
+            "desiredExperience": "Advanced",
+            "email": "asq@asq.com.au",
+            "website": "https://asq.com.au/"
+        },
+        {
+            "name": "Victorian Youth Symphony Orchestra",
+            "description": "",
+            "practiceLocation": {
+                "lat": -37.803411, 
+                "lng": 144.968371
+            },
+            "type": "Orchestra",
+            "seekingInstruments": [
+                "Viola",
+                "Flute",
+                "Double Bass",
+                "Bassoon"
+            ],
+            "desiredExperience": "Advanced",
+            "email": "admin@vyso.org.au",
+            "website": "https://www.vyso.org.au/"
+        }
+
+    ]
+}
