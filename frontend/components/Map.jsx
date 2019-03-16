@@ -13,12 +13,15 @@ class Map extends Component {
           disableDefaultUI: true,
           gestureHandling: "greedy"
         });
+        this.refreshMap();
       } else {
         setTimeout(this.initMap, 200);
       }
     };
 
     this.refreshMap = () => {
+
+      console.log(this.props.loadData.bands);
       /*const targetLocationLatLng = new google.maps.LatLng(
         this.props.targetLocation.latitude,
         this.props.targetLocation.longitude
@@ -71,35 +74,10 @@ class Map extends Component {
         icon: "assets/images/icon-home.svg"
       });*/
     };
-
-    this.updateMap = () => {
-      /*const targetLocationLatLng = new google.maps.LatLng(
-        this.props.targetLocation.latitude,
-        this.props.targetLocation.longitude
-      );
-      const homeLocationLatLng = new google.maps.LatLng(
-        this.props.homeLocation.latitude,
-        this.props.homeLocation.longitude
-      );
-      const currentLocationLatLng = new google.maps.LatLng(
-        this.props.currentLocation.latitude,
-        this.props.currentLocation.longitude
-      );
-
-      const lineCoords = [
-        currentLocationLatLng,
-        targetLocationLatLng
-      ];
-
-      this.currentLocationCircle.setOptions({center: currentLocationLatLng});
-      this.currentToTargetLocationLine.setOptions({path: lineCoords});
-      this.map.panTo({lat: this.props.currentLocation.latitude - 0.0015, lng: this.props.currentLocation.longitude});*/
-    }
   }
 
   componentDidMount() {
     window.setTimeout(this.initMap, 200);
-    //this.refreshMap();*/
   }
 
   componentDidUpdate(prevProps) {
