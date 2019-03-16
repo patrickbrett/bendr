@@ -35,9 +35,13 @@ class List extends Component {
         >
           Add
         </button>
-        <button onClick={this.props.removeAll} className={`removeAllButton`}>
+        <button onClick={()=>this.props.removeAll()} className={`removeAllButton`}>
           Clear
         </button>
+        <button onClick={this.props.feelingLucky} className={`feelingLuckyButton`}>
+          I'm Feeling Bendy
+        </button>
+          <span />
         {chosenBarsDisplay}
         <span />
         {bendMeButton}
