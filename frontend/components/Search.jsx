@@ -9,7 +9,7 @@ class Search extends Component {
 
     return (
         <form onSubmit={submit}>
-          <input className="searchBar" type="text" onChange={this.props.updateSearch} value={this.props.searchTerm} />
+          <input className="searchBar" type="text" placeholder="Enter a location..." onChange={this.props.updateSearch} value={this.props.searchTerm} />
         </form>
     );
   }
