@@ -39,7 +39,7 @@ class List extends Component {
           Clear
         </button>
         <button onClick={this.props.feelingLucky} className={`feelingLuckyButton`}>
-          Choose for me
+          I'm Feeling Bendy
         </button>
         {chosenBarsDisplay}
         <span />

@@ -78,6 +78,73 @@ html, body {
     border-radius: 5px;
 }
 
+/* Chrome, Safari, Opera */
+@-webkit-keyframes rainbow{
+    0%{color: orange;}
+    10%{color: purple;}
+    20%{color: red;}
+    30%{color: CadetBlue;}
+    40%{color: yellow;}
+    50%{color: coral;}
+    60%{color: green;}
+    70%{color: cyan;}
+    80%{color: DeepPink;}
+    90%{color: DodgerBlue;}
+    100%{color: orange;}
+}
+
+/* Internet Explorer */
+@-ms-keyframes rainbow{
+    0%{color: orange;}
+    10%{color: purple;}
+    20%{color: red;}
+    30%{color: CadetBlue;}
+    40%{color: yellow;}
+    50%{color: coral;}
+    60%{color: green;}
+    70%{color: cyan;}
+    80%{color: DeepPink;}
+    90%{color: DodgerBlue;}
+    100%{color: orange;}
+}
+
+/* Standard Syntax */
+@keyframes rainbow{
+    0%{color: orange;}
+    10%{color: purple;}
+    20%{color: red;}
+    30%{color: CadetBlue;}
+    40%{color: yellow;}
+    50%{color: coral;}
+    60%{color: green;}
+    70%{color: cyan;}
+    80%{color: DeepPink;}
+    90%{color: DodgerBlue;}
+    100%{color: orange;}
+}
+.feelingLuckyButton {
+    font-weight: bold;
+    font-size: 20px;
+    color: #f17105;
+    font-family: "Roboto Condensed", sans-serif;
+    padding: 10px;
+    background: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.feelingLuckyButton:hover{
+/* Chrome, Safari, Opera */
+-webkit-animation: rainbow 5s infinite;
+
+/* Internet Explorer */
+-ms-animation: rainbow 5s infinite;
+
+/* Standard Syntax */
+animation: rainbow 5s infinite;
+}
+
 .bendMeButton {
     font-weight: bold;
     font-size: 25px;
@@ -132,7 +199,7 @@ html, body {
     background-repeat: no-repeat;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
-    padding: 12px 20px 12px 60px;
+    padding: 12px 40px 12px 60px;
     text-align: left;
     font-family: "Roboto Condensed", sans-serif;
 }
