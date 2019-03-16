@@ -48,21 +48,52 @@ html, body {
     position: absolute;
     top: 20vh;
     left: 5vh;
-    width: 20vw;
-    height: 30vh;
-    overflow: auto;
+    line-height: 2;
+    width: 25vw;
+    height: auto;
     background: #fff;
     padding: 20px;
     border-radius: 10px;
+    opacity: 0.9;
 }
 
-.addButton {
+.addButton, .removeAllButton {
     font-weight: normal;
+    font-size: 20px;
+    font-family: "Roboto Condensed", sans-serif;
     padding: 10px;
     background: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+.bendMeButton {
+    font-weight: bold;
+    font-size: 25px;
+    font-family: "Roboto Condensed", sans-serif;
+    padding: 10px;
+    background: #f17105;
+    border: none;
+    border-radius: 5px;
+    position: absolute;
+    right: 10px;
 }
 
 .addButton.isAddMode {
     font-weight: bold;
-    background: #aaa;
+    background: #cbefff;
+}
+
+.addButton:focus, .bendMeButton:focus, .removeAllButton:focus {
+    outline: none;
+}
+
+.removeButton {
+    font-weight: normal;
+    font-size: 14px;
+    font-family: "Roboto Condensed", sans-serif;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    background: #ffb2b2
 }
