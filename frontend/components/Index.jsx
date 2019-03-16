@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Header from "./Header";
-import PageContent from "./PageContent";
-import Footer from "./Footer";
+import Header from "./Header.jsx";
+import PageContent from "./PageContent.jsx";
+import Footer from "./Footer.jsx";
 
 class Index extends Component {
   render() {
