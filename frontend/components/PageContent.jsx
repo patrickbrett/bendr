@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Map from "./Map.jsx";
 import List from "./List.jsx";
-import data from "../assets/data.json";
 import { apiKey } from "../apiKey.json";
+const TravellingDrunkard = require("../logic/TravellingDrunkard");
 
 class PageContent extends Component {
   constructor(props) {
@@ -59,6 +59,14 @@ class PageContent extends Component {
       });
       this.setState({ chosenBars: [] });
     };
+
+    this.calculateRoute = () => {
+      TravellingDrunkard.calculateRoute(this.state.chosenBars);
+    };
+
+    this.bendMe = () => {
+      this.calculateRoute();
+    }
   }
 
   componentDidMount() {
@@ -69,7 +77,7 @@ class PageContent extends Component {
     return (
       <div id="pageContent">
         <Map availableBars={this.state.availableBars} chosenBars={this.state.chosenBars} chooseBar={this.chooseBar} removeBar={this.removeBar} isAddMode={this.state.isAddMode} markers={this.markers} />
-        <List chosenBars={this.state.chosenBars} removeAll={this.removeAll} isAddMode={this.state.isAddMode} toggleAddMode={this.toggleAddMode} removeBar={this.removeBar} />
+        <List chosenBars={this.state.chosenBars} bendMe={this.bendMe} removeAll={this.removeAll} isAddMode={this.state.isAddMode} toggleAddMode={this.toggleAddMode} removeBar={this.removeBar} />
       </div>
     );
   }
