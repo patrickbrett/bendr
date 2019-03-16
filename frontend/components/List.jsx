@@ -6,12 +6,13 @@ class List extends Component {
 
     const chosenBarsDisplay = chosenBars.map(bar => {
       return (
-        <div>{bar.name}</div>
+        <div key={bar.name}>{bar.name} <button onClick={()=>this.props.removeBar(bar)} className="removeButton">Remove</button></div>
       );
     });
 
     return (
       <div id="barList">
+        <button onClick={this.props.toggleAddMode} className={`addButton` + (this.props.isAddMode ? ` isAddMode` : ``)}>Add</button>
         {chosenBarsDisplay}
       </div>
     );

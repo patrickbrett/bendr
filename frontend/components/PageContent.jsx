@@ -9,7 +9,9 @@ class PageContent extends Component {
     super(props);
 
     this.state = {
-      chosenBars: []
+      chosenBars: [],
+      availableBars: [],
+      isAddMode: false
     };
 
     this.retrieveBars = () => {
@@ -23,16 +25,31 @@ class PageContent extends Component {
         .catch(err => console.log(err));
     };
 
+    this.toggleAddMode = () => {
+      this.setState(prevState=>({
+        isAddMode: !prevState.isAddMode
+      }));
+    };
+
     this.chooseBar = (bar) => {
-      console.log("here", bar);
       this.setState(prevState => {
         const { chosenBars } = prevState;
         if (!chosenBars.includes(bar)) {
           chosenBars.push(bar);
         }
         return { chosenBars: chosenBars };
-      })
-    }
+      });
+    };
+
+    this.removeBar = (bar) => {
+      this.setState(prevState => {
+        let { chosenBars } = prevState;
+        if (chosenBars.includes(bar)) {
+          chosenBars = chosenBars.filter(bar2 => bar2 !== bar);
+        }
+        return { chosenBars: chosenBars };
+      });
+    };
   }
 
   componentDidMount() {
@@ -42,8 +59,8 @@ class PageContent extends Component {
   render() {
     return (
       <div id="pageContent">
-        <Map availableBars={this.state.availableBars} chooseBar={this.chooseBar} />
-        <List chosenBars={this.state.chosenBars} />
+        <Map availableBars={this.state.availableBars} chosenBars={this.state.chosenBars} chooseBar={this.chooseBar} removeBar={this.removeBar} isAddMode={this.state.isAddMode} />
+        <List chosenBars={this.state.chosenBars} isAddMode={this.state.isAddMode} toggleAddMode={this.toggleAddMode} removeBar={this.removeBar} />
       </div>
     );
   }

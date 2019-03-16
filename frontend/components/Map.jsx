@@ -124,14 +124,21 @@ class Map extends Component {
           infoWindows.push(infoWindow);
 
           marker.addListener("click", ()=>{
-            infoWindows.forEach(infoWindow => infoWindow.close());
-            if (infoWindow.isOpen) {
-              infoWindow.close(this.map, marker);
-              infoWindow.isOpen = false;
+            if (this.props.isAddMode) {
+              if (this.props.chosenBars.includes(bar)) {
+                this.props.removeBar(bar);
+              } else {
+                this.props.chooseBar(bar);
+              }
             } else {
-              infoWindow.open(this.map, marker);
-              infoWindow.isOpen = true;
-              this.props.chooseBar(bar);
+              infoWindows.forEach(infoWindow => infoWindow.close());
+              if (infoWindow.isOpen) {
+                infoWindow.close(this.map, marker);
+                infoWindow.isOpen = false;
+              } else {
+                infoWindow.open(this.map, marker);
+                infoWindow.isOpen = true;
+              }
             }
           });
         });
