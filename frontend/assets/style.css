@@ -34,8 +34,9 @@ html, body {
 }
 
 #logo {
-    width: 6px;
+    width: 150px;
     height: auto;
+    padding: 20px 20px 20px 20px;
 }
 
 #map {
