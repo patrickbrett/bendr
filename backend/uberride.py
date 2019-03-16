@@ -2,6 +2,7 @@ from uber_rides.session import Session
 from uber_rides.client import UberRidesClient
 import requests
 import webbrowser
+import oauth2
 
 session = Session(server_token="CUofQlGNUbYK3x9FjX0AtlFjEJCak4O59V61YeGs")
 client = UberRidesClient(session)
