@@ -18,6 +18,7 @@ class PageContent extends Component {
       isAddMode: true,
       isOrdered: false,
       searchTerm: "",
+      prevSearchTerm: "",
       cameraPosition: {
         lat: 0,
         lng: 0
@@ -31,8 +32,7 @@ class PageContent extends Component {
       )
         .then(res => {
           res.json().then(json => {
-            this.setState({ cameraPosition: json.results[0].geometry.location,  }, callback);
-            console.log("pos", this.state.cameraPosition);
+            this.setState({ cameraPosition: json.results[0].geometry.location, chosenBars: [], prevSearchTerm: this.state.searchTerm }, callback);
           });
         })
         .catch(err => console.log(err));
@@ -56,9 +56,11 @@ class PageContent extends Component {
     this.performSearch = () => {
       const callback = ()=>this.moveCamera(this.retrieveBars);
       if (this.state.searchTerm === "im hungover") {
-        this.setState({hangoverMode: true, searchTerm: ""}, callback);
+        this.removeAll();
+        this.setState({hangoverMode: true, searchTerm: this.state.prevSearchTerm}, callback);
       } else if (this.state.searchTerm === "more alcohol please") {
-        this.setState({hangoverMode: false, searchTerm: ""}, callback);
+        this.removeAll();
+        this.setState({hangoverMode: false, searchTerm: this.state.prevSearchTerms}, callback);
       } else {
         callback();
       }
@@ -115,7 +117,7 @@ class PageContent extends Component {
           let newChosenBars = Array.from(prevState.availableBars).sort(()=>Math.random()-0.5).slice(0, 5);
           this.markers.forEach(marker => {
               if (newChosenBars.includes(marker.bar)) {
-                marker.setIcon("assets/icon.png");
+                marker.setIcon("assets/iconWhite.png");
               }
           });
           return { chosenBars: newChosenBars };

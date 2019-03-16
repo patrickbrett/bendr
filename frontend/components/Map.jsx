@@ -202,19 +202,25 @@ class Map extends Component {
     };
 
     this.toggleDarkTheme = () => {
-      //const currentOptions = this.map.getOptions();
       const currentOptions = {};
       if (this.props.hangoverMode) {
         currentOptions.styles = [];
       } else {
         currentOptions.styles = this.mapStylesDark;
       }
+      this.props.markers.forEach(marker => {
+        marker.setMap(null);
+      });
       this.map.setOptions({ styles: currentOptions.styles});
     }
   }
 
   componentDidMount() {
     window.setTimeout(this.initMap, 200);
+  }
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    return true;
   }
 
   componentDidUpdate(prevProps) {
