@@ -155,7 +155,7 @@ class Map extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (JSON.stringify(prevProps.currentLocation) !== JSON.stringify(this.props.currentLocation)) { //calling stringify every render - bad idea?
+    if (JSON.stringify(prevProps.availableBars) !== JSON.stringify(this.props.availableBars)) { //calling stringify every render - bad idea?
       console.log(prevProps, this.props);
       this.refreshMap();
     }
