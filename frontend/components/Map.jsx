@@ -22,6 +22,24 @@ class Map extends Component {
     this.refreshMap = () => {
 
       console.log(this.props.loadData.bands);
+      const bands = this.props.loadData.bands;
+
+      bands.forEach(band => {
+        const latLng = new google.maps.LatLng(
+          band.practiceLocation.lat,
+          band.practiceLocation.lng
+        );
+
+        new google.maps.Circle({
+          strokeWeight: 0,
+          fillColor: '#A01A7D',
+          fillOpacity: 1,
+          map: this.map,
+          center: latLng,
+          radius: 25
+        });
+      });
+
       /*const targetLocationLatLng = new google.maps.LatLng(
         this.props.targetLocation.latitude,
         this.props.targetLocation.longitude
