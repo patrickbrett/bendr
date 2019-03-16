@@ -1,108 +1,69 @@
 {
-    "bands": [{
-            "name": "Monash Philharmonic Orchestra",
-            "description": "",
-            "practiceLocation": {
-                "lat": -37.909256,
-                "lng": 145.132224
+    "bars": [
+        {
+            "name": "Rooftop bar",
+            "rating": 4.3,
+            "hours": {
+                "open": "1100",
+                "close": "0100"
             },
-            "type": "Orchestra",
-            "seekingInstruments": [
-                "Viola",
-                "Double Bass",
-                "Cello",
-                "Trombone"
-            ],
-            "desiredExperience": "All",
-            "email": "info@monashphil.org",
-            "website": "https://monashphil.org/"
+            "price": "$$",
+            "location": {
+                "lat": -37.811989,
+                "lng": 144.965210
+            }
         },
         {
-            "name": "Manningham Concert Band",
-            "description": "",
-            "practiceLocation": {
-                "lat": -37.814536,
-                "lng": 145.009917
+            "name": "Union Electric Bar & Rooftop Gin Garden",
+            "rating": 4.5,
+            "hours": {
+                "open": "1200",
+                "close": "0100"
             },
-            "type": "Band",
-            "seekingInstruments": [
-                "Trumpet",
-                "Trombone",
-                "Oboe"
-            ],
-            "desiredExperience": "Intermediate",
-            "email": "questions@hotmail.com",
-            "website": "https://manninghamband.org.au/"
+            "price": "$$",
+            "location": {
+                "lat": -37.811798,
+                "lng": 144.966599
+            }
         },
         {
-            "name": "Boroondara Symphonic Band",
-            "description": "",
-            "practiceLocation": {
-                "lat": -37.833530, 
-                "lng": 145.042660
+            "name": "Cookie",
+            "rating": 4.1,
+            "hours": {
+                "open": "1200",
+                "close": "0300"
             },
-            "type": "Band",
-            "seekingInstruments": [
-                "Clarinet",
-                "Tuba",
-                "Oboe",
-                "French Horn"
-            ],
-            "desiredExperience": "Beginner",
-            "email": "president@bsb.com.au",
-            "website": "https://www.boroondarasymphonicband.org.au/"
+            "price": "$$",
+            "location": {
+                "lat": -37.811990,
+                "lng": 144.965210
+            }
         },
         {
-            "name": "Melbourne String Ensemble",
-            "description": "",
-            "practiceLocation": {
-                "lat": -37.834322, 
-                "lng": 145.029099
+            "name": "Section 8",
+            "rating": 4.1,
+            "hours": {
+                "open": "1200",
+                "close": "0100"
             },
-            "type": "String Ensemble",
-            "seekingInstruments": [
-                "Violin",
-                "Viola",
-                "Cello",
-                "Double Bass"
-            ],
-            "desiredExperience": "Advanced",
-            "email": "info@mse.org.au",
-            "website": "https://mse.org.au/"
+            "price": "$$",
+            "location": {
+                "lat": -37.811771,
+                "lng": 144.965393
+            }
         },
         {
-            "name": "Australian String Quartet",
-            "description": "",
-            "practiceLocation": {
-                "lat": -37.835451, 
-                "lng": 144.963997
+            "name": "1806",
+            "rating": 4.6,
+            "hours": {
+                "open": "1600",
+                "close": "0100"
             },
-            "type": "String Quartet",
-            "seekingInstruments": [
-                "Cello"
-            ],
-            "desiredExperience": "Advanced",
-            "email": "asq@asq.com.au",
-            "website": "https://asq.com.au/"
-        },
-        {
-            "name": "Victorian Youth Symphony Orchestra",
-            "description": "",
-            "practiceLocation": {
-                "lat": -37.803411, 
-                "lng": 144.968371
-            },
-            "type": "Orchestra",
-            "seekingInstruments": [
-                "Viola",
-                "Flute",
-                "Double Bass",
-                "Bassoon"
-            ],
-            "desiredExperience": "Advanced",
-            "email": "admin@vyso.org.au",
-            "website": "https://www.vyso.org.au/"
+            "price": "$$$",
+            "location": {
+                "lat": -37.811640,
+                "lng": 144.970090
+            }
         }
-
     ]
 }
