@@ -7,7 +7,7 @@ class Map extends Component {
     this.initMap = () => {
       if (window.google) {
         this.map = new window.google.maps.Map(document.getElementById("map"), {
-          center: {lat: -37.813762, lng: 144.970467},
+          center: { lat: -37.813762, lng: 144.970467 },
           zoom: 16,
           mapTypeId: "roadmap",
           disableDefaultUI: true,
@@ -20,12 +20,14 @@ class Map extends Component {
     };
 
     this.refreshMap = () => {
-
       console.log(this.props.loadData.bands);
-      const bands = this.props.loadData.bands;
+      const {availableBars, chosenBars} = this.props.loadData;
 
-      bands.forEach(band => {
-        const marker = new google.maps.Marker({position: band.practiceLocation, map: this.map});
+      availableBars.forEach(bar => {
+        const marker = new google.maps.Marker({
+          position: bar.geometry.location,
+          map: this.map
+        });
       });
 
       /*const targetLocationLatLng = new google.maps.LatLng(
@@ -87,10 +89,10 @@ class Map extends Component {
   }
 
   componentDidUpdate(prevProps) {
-   /* if (JSON.stringify(prevProps.currentLocation) !== JSON.stringify(this.props.currentLocation)) { //calling stringify every render - bad idea?
+    if (JSON.stringify(prevProps.currentLocation) !== JSON.stringify(this.props.currentLocation)) { //calling stringify every render - bad idea?
       console.log(prevProps, this.props);
-      this.updateMap();
-    }*/
+      this.refreshMap();
+    }
   }
 
   render() {
