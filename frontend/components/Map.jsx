@@ -4,6 +4,8 @@ class Map extends Component {
   constructor(props) {
     super(props);
 
+    this.polyline = null;
+
     this.initMap = () => {
       if (window.google) {
         this.map = new window.google.maps.Map(document.getElementById("map"), {
@@ -117,6 +119,8 @@ class Map extends Component {
             icon: "assets/icon.png"
           });
 
+          marker.bar = bar;
+
           this.props.markers.push(marker);
 
           const infoWindowContent = `
@@ -156,6 +160,22 @@ class Map extends Component {
         setTimeout(this.refreshMap, 200);
       }
     };
+
+    this.refreshLines = () => {
+      const lineCoords = this.props.chosenBars.map(bar => bar.geometry.location);
+      console.log(lineCoords);
+      if (this.polyline) this.polyline.setMap(null);
+      this.polyline = new google.maps.Polyline(
+        {
+          path: lineCoords,
+          geodesic: true,
+          strokeColor: '#fff',
+          strokeOpacity: 1,
+          strokeWeight: 2
+        }
+      );
+      this.polyline.setMap(this.map);
+    };
   }
 
   componentDidMount() {
@@ -167,8 +187,14 @@ class Map extends Component {
       JSON.stringify(prevProps.availableBars) !==
       JSON.stringify(this.props.availableBars)
     ) {
-      console.log(prevProps, this.props);
       this.refreshMap();
+    }
+
+    if (
+      JSON.stringify(prevProps.chosenBars) !==
+      JSON.stringify(this.props.chosenBars)
+    ) {
+      this.refreshLines();
     }
   }
 

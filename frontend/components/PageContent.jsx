@@ -51,6 +51,11 @@ class PageContent extends Component {
         if (chosenBars.includes(bar)) {
           chosenBars = chosenBars.filter(bar2 => bar2 !== bar);
         }
+        this.markers.forEach(marker => {
+          if (marker.bar === bar) {
+            marker.setIcon("assets/icon.png");
+          }
+        });
         return { chosenBars: chosenBars };
       });
     };
