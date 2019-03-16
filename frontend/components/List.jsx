@@ -14,6 +14,7 @@ class List extends Component {
       <div id="barList">
         <button onClick={this.props.toggleAddMode} className={`addButton` + (this.props.isAddMode ? ` isAddMode` : ``)}>Add</button>
         {chosenBarsDisplay}
+        <button onClick={this.props.bendMe} className={`bendMeButton`}>Bend Me!</button>
       </div>
     );
   }

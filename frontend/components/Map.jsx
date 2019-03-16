@@ -127,8 +127,10 @@ class Map extends Component {
             if (this.props.isAddMode) {
               if (this.props.chosenBars.includes(bar)) {
                 this.props.removeBar(bar);
+                marker.setIcon("assets/icon.png");
               } else {
                 this.props.chooseBar(bar);
+                marker.setIcon("assets/iconWhite.png");
               }
             } else {
               infoWindows.forEach(infoWindow => infoWindow.close());
