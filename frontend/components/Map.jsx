@@ -31,6 +31,8 @@ class Map extends Component {
 
           const infoWindow = '';
         });
+      } else {
+        setTimeout(this.refreshMap, 200);
       }
     };
   }
