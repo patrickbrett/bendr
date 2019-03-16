@@ -5,7 +5,8 @@
   "scripts": {
     "build": "webpack",
     "start": "node app.js",
-    "format": "prettier --write {frontend,backend}/**/*.{js,jsx}"
+    "format": "prettier --write {frontend,backend}/**/*.{js,jsx}",
+    "dev": "npm build && npm start"
   },
   "author": "",
   "license": "ISC",

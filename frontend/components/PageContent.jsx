@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Map from "./Map.jsx";
 import Search from "./Search.jsx";
 import List from "./List.jsx";
+import Options from "./Options.jsx";
 import { apiKey } from "../apiKey.json";
 const TravellingDrunkard = require("../logic/TravellingDrunkard");
 
@@ -24,8 +25,11 @@ class PageContent extends Component {
         lat: 0,
         lng: 0
       },
-      hangoverMode: false
+      hangoverMode: false,
+      hoursCheck:  false
     };
+
+    this.onHoursChecked = this.onHoursChecked.bind(this);
 
     this.moveCamera = (callback) => {
       fetch(
@@ -175,11 +179,30 @@ class PageContent extends Component {
     this.performSearch();
   }
 
+  onHoursChecked(){
+    this.setState(prevState => {
+      console.log(!prevState.hoursCheck);
+      return {hoursCheck: !prevState.hoursCheck}
+    });
+  }
+
   render() {
+    let availableBars;
+    if (this.state.hoursCheck) {
+      availableBars = this.state.availableBars.filter(bar => {
+        console.log(bar);
+        if (typeof bar.opening_hours === 'undefined') {
+          return true;
+        }
+        return bar.opening_hours.open_now;
+      });
+    } else {
+      availableBars = this.state.availableBars
+    }
     return (
       <div id="pageContent">
         <Map
-          availableBars={this.state.availableBars}
+          availableBars={availableBars}
           isOrdered={this.state.isOrdered}
           chosenBars={this.state.chosenBars}
           chooseBar={this.chooseBar}
@@ -204,6 +227,10 @@ class PageContent extends Component {
           toggleAddMode={this.toggleAddMode}
           removeBar={this.removeBar}
           feelingLucky={this.feelingLucky}
+        />
+        <Options
+            isHoursCheck = {this.state.hoursCheck}
+            onHoursChecked = {this.onHoursChecked}
         />
       </div>
     );

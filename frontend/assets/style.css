@@ -63,9 +63,82 @@ html, body {
     width: 25vw;
     height: auto;
     background: #fff;
-    padding: 20px;
+    padding: 10px 15px 10px 15px;
     border-radius: 10px;
     opacity: 0.9;
+}
+
+#optionsBox {
+    position: absolute;
+    bottom: 5vh;
+    right: 5vh;
+    line-height: 2;
+    width: auto;
+    height: auto;
+    background: #fff;
+    padding: 15px 10px 15px 10px;
+    border-radius: 10px;
+    opacity: 0.7;
+    font-size: 14px;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 26px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #f17105;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 26px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
 }
 
 .addButton, .removeAllButton {
@@ -192,15 +265,15 @@ animation: rainbow 5s infinite;
     height: auto;
     top: 20vh;
     left: 5vh;
-    opacity: 0.9;
+    opacity: 0.7;
     box-sizing: border-box;
     font-size: 20px;
     background-color: white;
     background-image: url("search.png");
     background-position: 15px 10px;
     background-repeat: no-repeat;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
+    -webkit-transition: width 0.4s ease-in-out, opacity .5s ease-in-out;
+    transition: width 0.4s ease-in-out, opacity .5s ease-in-out;
     padding: 12px 40px 12px 60px;
     text-align: left;
     font-family: "Roboto Condensed", sans-serif;
@@ -210,4 +283,8 @@ animation: rainbow 5s infinite;
     width: 25vw;
     outline: none;
     border: 2px solid #f17105;
+}
+
+.searchBar:hover{
+    width: 25vw;
 }

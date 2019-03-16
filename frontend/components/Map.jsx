@@ -107,19 +107,29 @@ class Map extends Component {
     };
 
     this.refreshMap = () => {
+      for (let i = 0; i < this.props.markers.length; i++){
+        this.props.markers[i].setMap(null);
+      }
       const { availableBars } = this.props;
 
       const infoWindows = [];
 
       if (availableBars && window.google) {
         availableBars.forEach(bar => {
-          const marker = new google.maps.Marker({
-            position: bar.geometry.location,
-            map: this.map,
-            icon: "assets/icon.png"
-          });
-
-          if (this.props.hangoverMode) {
+          //if(bar.open_now == true || document.getElementById("hoursCheck").checked == false) {
+            const marker = new google.maps.Marker({
+              position: bar.geometry.location,
+              map: this.map,
+              icon: "assets/icon.png"
+            });
+          if (this.props.chosenBars.includes(bar)){
+            if (this.props.hangoverMode) {
+              marker.setIcon("assets/dayIconWhite.png");
+            } else {
+              marker.setIcon("assets/iconWhite.png");
+            }
+          }
+          else if (this.props.hangoverMode) {
             marker.setIcon("assets/dayIcon.png");
           }
 
@@ -130,8 +140,8 @@ class Map extends Component {
           const infoWindowContent = `
             <div>${bar.name}</div>
             <div>Rating: ${bar.rating}</div>
-            <div>Price level: ${bar.price_level}</div>
-            <div>Open now: ${bar.open_now? `Yes` : `No`}</div>
+            ${bar.price_level === undefined ? `` : `<div>Price level: ${bar.price_level}</div>`}
+            <div> Open now: ${bar.open_now? `Yes` : `No`}</div>
           `;
 
           const infoWindow = new google.maps.InfoWindow({
