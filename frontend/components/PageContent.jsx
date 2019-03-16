@@ -102,15 +102,14 @@ class PageContent extends Component {
     };
 
     this.feelingLucky = () => {
+      console.log("here");
       this.removeAll(()=>{
         this.setState(prevState => {
           let newChosenBars = Array.from(prevState.availableBars).sort(()=>Math.random()-0.5).slice(0, 5);
           this.markers.forEach(marker => {
-            newChosenBars.forEach(bar => {
-              if (marker.bar === bar) {
+              if (newChosenBars.includes(marker.bar)) {
                 marker.setIcon("assets/icon.png");
               }
-            });
           });
           return { chosenBars: newChosenBars };
         });
@@ -140,7 +139,6 @@ class PageContent extends Component {
 
   componentDidMount() {
     this.performSearch();
-    setTimeout(this.feelingLucky, 2000);
   }
 
   render() {
@@ -168,6 +166,7 @@ class PageContent extends Component {
           isAddMode={this.state.isAddMode}
           toggleAddMode={this.toggleAddMode}
           removeBar={this.removeBar}
+          feelingLucky={this.feelingLucky}
         />
       </div>
     );
