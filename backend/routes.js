@@ -1,5 +1,3 @@
-const routes = (app) => {
-
-}
+const routes = app => {};
 
 module.exports = routes;
