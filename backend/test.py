@@ -50,56 +50,57 @@ def callback():
     tokens = json.loads(access_token_response.text)
     access_token = tokens['access_token']
 
-    # api_call_headers = {'Authorization': 'Bearer ' + access_token}
-    # api_call_response = requests.get("https://sandbox-api.uber.com/v1.2/", headers=api_call_headers, verify=False)
+    callUber(access_token)
+
+def auth_code_oauth2credential():
+    return OAuth2Credential(
+        client_id=CLIENT_ID,
+        client_secret=CLIENT_SECRET,
+        redirect_url=REDIRECT_URL,
+        access_token=ACCESS_TOKEN,
+        expires_in_seconds=EXPIRES_IN_SECONDS,
+        scopes=SCOPES,
+        grant_type=auth.AUTHORIZATION_CODE_GRANT,
+        refresh_token=REFRESH_TOKEN,
+    )
 
 
-    return redirect(url_for('calluber'))
+def callUber(access_token):
+    api_call_headers = {'Authorization': 'Bearer ' + access_token}
 
-
-@app.route("/calluber")
-def callUber():
+    start = [-37.818182, 144.968484]  # lat lng of user's location at last pub
+    end = [-37.809419, 144.969887]  # user's home address lat lng
 
     session = Session(server_token="CUofQlGNUbYK3x9FjX0AtlFjEJCak4O59V61YeGs")
     client = UberRidesClient(session)
-    response = client.get_products(37.77, -122.41)  # lat lng of user's location at last pub
+    response = client.get_products(start[0], start[1])
     products = response.json.get('products')
     product_id = products[0].get('product_id')  # get first car
-
-    start = [0, 0]
-    end = [0, 0]
 
     estimate = client.estimate_ride(
         product_id=product_id,
         start_latitude=start[0],
         start_longitude=start[1],
         end_latitude=end[0],
-        end_longitude=end[1],
-        seat_count=2
+        end_longitude=end[1]
+        # seat_count=2
     )
     fare = estimate.json.get('fare')
 
     # fake request
     api_url = "https://sandbox-api.uber.com/v1.2/requests"
     data = {
-        ['fare_id']: "string",
+        ['fare_id']: fare['fare_id'],
         ['start_latitude']: start[0],
         ['start_longitude']: start[1],
         ['end_latitude']: end[0],
         ['end_longitude']: end[1],
     }
+    print("hello")
+    # make the fake request
+    r = requests.post(api_url, headers=api_call_headers, data=data)
+    print("hello")
 
-    r = requests.post(api_url)
-
-    response = client.request_ride(
-        product_id=product_id,
-        start_latitude=start[0],
-        start_longitude=-start[1],
-        end_latitude=end[0],
-        end_longitude=end[1],
-        seat_count=2,
-        fare_id=fare['fare_id']
-    )
 
 
 if __name__ == "__main__":
