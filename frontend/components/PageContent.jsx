@@ -11,6 +11,7 @@ class PageContent extends Component {
 
     this.markers = [];
     this.lines = [];
+    this.polylines = [];
 
     this.state = {
       chosenBars: [],
@@ -108,6 +109,8 @@ class PageContent extends Component {
             }
           }
         });
+        console.log(this.polylines);
+        this.polylines[0].setMap(null);
         return { chosenBars: chosenBars, isOrdered: false };
       });
     };
@@ -180,6 +183,7 @@ class PageContent extends Component {
           isAddMode={this.state.isAddMode}
           markers={this.markers}
           lines={this.lines}
+          polylines={this.polylines}
           cameraPosition={this.state.cameraPosition}
           hangoverMode={this.state.hangoverMode}
         />
