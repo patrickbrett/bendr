@@ -32,3 +32,8 @@ html, body {
 #footer span {
     margin-top: 5px;
 }
+
+#logo {
+    width: 50px;
+    height: auto;
+}
