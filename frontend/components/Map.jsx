@@ -20,67 +20,18 @@ class Map extends Component {
     };
 
     this.refreshMap = () => {
-      console.log(this.props.loadData.bands);
-      const {availableBars, chosenBars} = this.props.loadData;
+      const {availableBars, chosenBars} = this.props;
 
-      availableBars.forEach(bar => {
-        const marker = new google.maps.Marker({
-          position: bar.geometry.location,
-          map: this.map
+      if (availableBars) {
+        availableBars.forEach(bar => {
+          const marker = new google.maps.Marker({
+            position: bar.geometry.location,
+            map: this.map
+          });
+
+          const infoWindow = '';
         });
-      });
-
-      /*const targetLocationLatLng = new google.maps.LatLng(
-        this.props.targetLocation.latitude,
-        this.props.targetLocation.longitude
-      );
-      const homeLocationLatLng = new google.maps.LatLng(
-        this.props.homeLocation.latitude,
-        this.props.homeLocation.longitude
-      );
-      const currentLocationLatLng = new google.maps.LatLng(
-        this.props.currentLocation.latitude,
-        this.props.currentLocation.longitude
-      );
-
-      new google.maps.Circle({
-        strokeWeight: 0,
-        fillColor: '#A01A7D',
-        fillOpacity: 1,
-        map: this.map,
-        center: targetLocationLatLng,
-        radius: 25
-      });
-
-      this.currentLocationCircle = new google.maps.Circle({
-        strokeColor: '#EF5D60',
-        strokeOpacity: 0.5,
-        strokeWeight: 2,
-        fillColor: '#EF5D60',
-        fillOpacity: 0.5,
-        map: this.map,
-        center: currentLocationLatLng,
-        radius: 50
-      });
-
-      const lineCoords = [
-        currentLocationLatLng,
-        targetLocationLatLng
-      ];
-      this.currentToTargetLocationLine = new google.maps.Polyline({
-        path: lineCoords,
-        geodesic: true,
-        strokeColor: '#EF5D60',
-        strokeOpacity: 0.1,
-        strokeWeight: 2,
-        map: this.map
-      });
-
-      new google.maps.Marker({
-        position: homeLocationLatLng,
-        map: this.map,
-        icon: "assets/images/icon-home.svg"
-      });*/
+      }
     };
   }
 

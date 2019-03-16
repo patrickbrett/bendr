@@ -32,7 +32,7 @@ class PageContent extends Component {
   render() {
     return (
       <div id="pageContent">
-        <Map loadData={this.state} />
+        <Map availableBars={this.state.availableBars} />
         <Form />
         <List />
       </div>
