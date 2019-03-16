@@ -5,7 +5,7 @@ html, body {
 }
 
 #header {
-    background: #F17105;
+    background: linear-gradient(90deg, #F17105, #f47f1f);
     width: 100%;
     height: 120px;
     overflow: auto;
