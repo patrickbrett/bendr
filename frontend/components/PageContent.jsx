@@ -21,7 +21,8 @@ class PageContent extends Component {
       cameraPosition: {
         lat: 0,
         lng: 0
-      }
+      },
+      hangoverMode: false
     };
 
     this.moveCamera = (callback) => {
@@ -31,17 +32,17 @@ class PageContent extends Component {
         .then(res => {
           res.json().then(json => {
             this.setState({ cameraPosition: json.results[0].geometry.location,  }, callback);
+            console.log("pos", this.state.cameraPosition);
           });
         })
         .catch(err => console.log(err));
     };
 
     this.retrieveBars = () => {
-      console.log(this.state.cameraPosition);
       fetch(
         `/service/bars/?lat=${encodeURIComponent(
           this.state.cameraPosition.lat
-        )}&lng=${encodeURIComponent(this.state.cameraPosition.lng)}`
+        )}&lng=${encodeURIComponent(this.state.cameraPosition.lng)}&hangoverMode=${this.state.hangoverMode}`
       )
         .then(res => {
           res.json().then(json => {
@@ -53,7 +54,14 @@ class PageContent extends Component {
     };
 
     this.performSearch = () => {
-      this.moveCamera(this.retrieveBars);
+      const callback = ()=>this.moveCamera(this.retrieveBars);
+      if (this.state.searchTerm === "im hungover") {
+        this.setState({hangoverMode: true, searchTerm: ""}, callback);
+      } else if (this.state.searchTerm === "more alcohol please") {
+        this.setState({hangoverMode: false, searchTerm: ""}, callback);
+      } else {
+        callback();
+      }
     };
 
     this.toggleAddMode = () => {
@@ -102,7 +110,6 @@ class PageContent extends Component {
     };
 
     this.feelingLucky = () => {
-      console.log("here");
       this.removeAll(()=>{
         this.setState(prevState => {
           let newChosenBars = Array.from(prevState.availableBars).sort(()=>Math.random()-0.5).slice(0, 5);
@@ -153,6 +160,7 @@ class PageContent extends Component {
           markers={this.markers}
           lines={this.lines}
           cameraPosition={this.state.cameraPosition}
+          hangoverMode={this.state.hangoverMode}
         />
         <Search
           updateSearch={this.updateSearch}
