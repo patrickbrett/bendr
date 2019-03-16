@@ -11,7 +11,18 @@ class Map extends Component {
           zoom: 16,
           mapTypeId: "roadmap",
           disableDefaultUI: true,
-          gestureHandling: "greedy"
+          gestureHandling: "greedy",
+          styles: [
+            {
+              featureType: 'poi',
+              stylers: [{visibility: 'off'}]
+            },
+            {
+              featureType: 'transit',
+              elementType: 'labels.icon',
+              stylers: [{visibility: 'off'}]
+            }
+          ]
         });
         this.refreshMap();
       } else {
@@ -26,7 +37,8 @@ class Map extends Component {
         availableBars.forEach(bar => {
           const marker = new google.maps.Marker({
             position: bar.geometry.location,
-            map: this.map
+            map: this.map,
+            icon: "assets/icon.png"
           });
 
           const infoWindow = '';
