@@ -25,19 +25,7 @@ class Map extends Component {
       const bands = this.props.loadData.bands;
 
       bands.forEach(band => {
-        const latLng = new google.maps.LatLng(
-          band.practiceLocation.lat,
-          band.practiceLocation.lng
-        );
-
-        new google.maps.Circle({
-          strokeWeight: 0,
-          fillColor: '#A01A7D',
-          fillOpacity: 1,
-          map: this.map,
-          center: latLng,
-          radius: 25
-        });
+        const marker = new google.maps.Marker({position: band.practiceLocation, map: this.map});
       });
 
       /*const targetLocationLatLng = new google.maps.LatLng(
