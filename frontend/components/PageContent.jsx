@@ -60,7 +60,7 @@ class PageContent extends Component {
         this.setState({hangoverMode: true, searchTerm: this.state.prevSearchTerm}, callback);
       } else if (this.state.searchTerm === "more alcohol please") {
         this.removeAll();
-        this.setState({hangoverMode: false, searchTerm: this.state.prevSearchTerms}, callback);
+        this.setState({hangoverMode: false, searchTerm: this.state.prevSearchTerm}, callback);
       } else {
         callback();
       }
@@ -82,10 +82,14 @@ class PageContent extends Component {
         }
         this.markers.forEach(marker => {
           if (marker.bar === bar) {
-            marker.setIcon("assets/iconWhite.png");
+            if (this.state.hangoverMode) {
+              marker.setIcon("assets/dayIconWhite.png");
+            } else {
+              marker.setIcon("assets/iconWhite.png");
+            }
           }
         });
-        return { chosenBars, isAddMode };
+        return { chosenBars, isAddMode, isOrdered: false };
       });
     };
 
@@ -97,18 +101,26 @@ class PageContent extends Component {
         }
         this.markers.forEach(marker => {
           if (marker.bar === bar) {
-            marker.setIcon("assets/icon.png");
+            if (this.props.hangoverMode) {
+              marker.setIcon("assets/dayIcon.png");
+            } else {
+              marker.setIcon("assets/icon.png");
+            }
           }
         });
-        return { chosenBars: chosenBars };
+        return { chosenBars: chosenBars, isOrdered: false };
       });
     };
 
     this.removeAll = (callback) => {
       this.markers.forEach(marker => {
-        marker.setIcon("assets/icon.png");
+        if (this.state.hangoverMode) {
+          marker.setIcon("assets/dayIcon.png");
+        } else {
+          marker.setIcon("assets/icon.png");
+        }
       });
-      this.setState({ chosenBars: [] }, callback);
+      this.setState({ chosenBars: [], isOrdered: false }, callback);
     };
 
     this.feelingLucky = () => {
@@ -117,10 +129,14 @@ class PageContent extends Component {
           let newChosenBars = Array.from(prevState.availableBars).sort(()=>Math.random()-0.5).slice(0, 5);
           this.markers.forEach(marker => {
               if (newChosenBars.includes(marker.bar)) {
-                marker.setIcon("assets/iconWhite.png");
+                if (this.state.hangoverMode) {
+                  marker.setIcon("assets/dayIconWhite.png");
+                } else {
+                  marker.setIcon("assets/iconWhite.png");
+                }
               }
           });
-          return { chosenBars: newChosenBars };
+          return { chosenBars: newChosenBars, isOrdered: false };
         });
       });
     };
@@ -132,6 +148,8 @@ class PageContent extends Component {
         const barListOrdered = route.pathNames.map(barName =>
           this.state.chosenBars.find(({ name }) => name === barName)
         );
+
+        console.log(route);
 
         return {
           chosenBars: barListOrdered,
@@ -155,6 +173,7 @@ class PageContent extends Component {
       <div id="pageContent">
         <Map
           availableBars={this.state.availableBars}
+          isOrdered={this.state.isOrdered}
           chosenBars={this.state.chosenBars}
           chooseBar={this.chooseBar}
           removeBar={this.removeBar}

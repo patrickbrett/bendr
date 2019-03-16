@@ -121,6 +121,10 @@ class Map extends Component {
             icon: "assets/icon.png"
           });
 
+          if (this.props.hangoverMode) {
+            marker.setIcon("assets/dayIcon.png");
+          }
+
           marker.bar = bar;
 
           this.props.markers.push(marker);
@@ -141,10 +145,18 @@ class Map extends Component {
             if (this.props.isAddMode) {
               if (this.props.chosenBars.includes(bar)) {
                 this.props.removeBar(bar);
-                marker.setIcon("assets/icon.png");
+                if (this.props.hangoverMode) {
+                  marker.setIcon("assets/dayIcon.png");
+                } else {
+                  marker.setIcon("assets/icon.png");
+                }
               } else if (this.props.chosenBars.length < 7) {
                 this.props.chooseBar(bar);
-                marker.setIcon("assets/iconWhite.png");
+                if (this.props.hangoverMode) {
+                  marker.setIcon("assets/dayIconWhite.png");
+                } else {
+                  marker.setIcon("assets/iconWhite.png");
+                }
               }
             } else {
               infoWindows.forEach(infoWindow => infoWindow.close());
@@ -188,7 +200,7 @@ class Map extends Component {
         {
           path: lineCoords,
           geodesic: true,
-          strokeColor: '#fff',
+          strokeColor: this.props.hangoverMode ? '#000' : '#fff',
           strokeOpacity: 0,
           icons: [{
             icon: lineSymbol,
@@ -205,8 +217,14 @@ class Map extends Component {
       const currentOptions = {};
       if (this.props.hangoverMode) {
         currentOptions.styles = [];
+        this.props.markers.forEach(marker => {
+          marker.setIcon("assets/dayIcon.png");
+        });
       } else {
         currentOptions.styles = this.mapStylesDark;
+        this.props.markers.forEach(marker => {
+          marker.setIcon("assets/icon.png");
+        });
       }
       this.props.markers.forEach(marker => {
         marker.setMap(null);
@@ -233,8 +251,9 @@ class Map extends Component {
 
     if (
       JSON.stringify(prevProps.chosenBars) !==
-      JSON.stringify(this.props.chosenBars)
+      JSON.stringify(this.props.chosenBars) || this.props.isOrdered && !prevProps.isOrdered
     ) {
+      console.log("here");
       this.refreshLines();
     }
 
