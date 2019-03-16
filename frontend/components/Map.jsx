@@ -163,6 +163,11 @@ class Map extends Component {
 
     this.refreshLines = () => {
       const lineCoords = this.props.chosenBars.map(bar => bar.geometry.location);
+      const lineSymbol = {
+        path: 'M 0,-1 0,1',
+        strokeOpacity: 1,
+        scale: 4
+      };
       console.log(lineCoords);
       if (this.polyline) this.polyline.setMap(null);
       this.polyline = new google.maps.Polyline(
@@ -170,7 +175,12 @@ class Map extends Component {
           path: lineCoords,
           geodesic: true,
           strokeColor: '#fff',
-          strokeOpacity: 1,
+          strokeOpacity: 0,
+          icons: [{
+            icon: lineSymbol,
+            offset: '0',
+            repeat: '20px'
+          }],
           strokeWeight: 2
         }
       );
