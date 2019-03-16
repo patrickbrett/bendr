@@ -33,6 +33,8 @@ class Map extends Component {
     this.refreshMap = () => {
       const {availableBars, chosenBars} = this.props;
 
+      const infoWindows = [];
+
       if (availableBars) {
         availableBars.forEach(bar => {
           const marker = new google.maps.Marker({
@@ -41,7 +43,28 @@ class Map extends Component {
             icon: "assets/icon.png"
           });
 
-          const infoWindow = '';
+          const infoWindowContent = `
+            <div>${bar.name}</div>
+            <div>Rating: ${bar.rating}</div>
+            <div>Price level: ${bar.price_level}</div>
+          `;
+
+          const infoWindow = new google.maps.InfoWindow({
+            content: infoWindowContent
+          });
+
+          infoWindows.push(infoWindow);
+
+          marker.addListener("click", ()=>{
+            infoWindows.forEach(infoWindow => infoWindow.close());
+            if (infoWindow.isOpen) {
+              infoWindow.close(this.map, marker);
+              infoWindow.isOpen = false;
+            } else {
+              infoWindow.open(this.map, marker);
+              infoWindow.isOpen = true;
+            }
+          });
         });
       } else {
         setTimeout(this.refreshMap, 200);
