@@ -81,7 +81,7 @@ class Graph {
         step: while (
           nextNodeIterator <
           this.edges.filter(edge => edge.fromNode.id === currentNode).length
-          ) {
+        ) {
           let prospective = availableNodes[nextNodeIterator];
           if (
             (!currentTour.includes(prospective) ||
@@ -259,7 +259,7 @@ class Graph {
       return path;
     });
 
-    pathList = pathList[0];
+    pathListNamed = pathListNamed[0];
 
     return pathListNamed;
   }
@@ -284,21 +284,23 @@ class Edge {
 }
 
 const TravellingDrunkard = {
-  calculateRoute: (bars) => {
-
+  calculateRoute: bars => {
     let barGraph = new Graph();
     const barNodes = [];
 
-    for (let i=0; i<bars.length; i++) {
+    for (let i = 0; i < bars.length; i++) {
       const barNode = new Node();
       barNodes.push(barNode);
       barGraph.addNode(barNode, bars[i].name);
     }
 
-    for (let i=0; i<bars.length; i++) {
-      for (let j=i+1; j<bars.length; j++) {
+    for (let i = 0; i < bars.length; i++) {
+      for (let j = i + 1; j < bars.length; j++) {
         // console.log(bars[i].geometry);
-        const distance = getDistance(bars[i].geometry.location, bars[j].geometry.location);
+        const distance = getDistance(
+          bars[i].geometry.location,
+          bars[j].geometry.location
+        );
         barGraph.addEdge(barNodes[i], barNodes[j], distance);
       }
     }
@@ -310,16 +312,19 @@ const TravellingDrunkard = {
 /* haversine formula */
 
 var rad = function(x) {
-  return x * Math.PI / 180;
+  return (x * Math.PI) / 180;
 };
 
 var getDistance = function(p1, p2) {
   var R = 6378137; // Earth’s mean radius in meter
   var dLat = rad(p2.lat - p1.lat);
   var dLong = rad(p2.lng - p1.lng);
-  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(rad(p1.lat)) * Math.cos(rad(p2.lat)) *
-    Math.sin(dLong / 2) * Math.sin(dLong / 2);
+  var a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(rad(p1.lat)) *
+      Math.cos(rad(p2.lat)) *
+      Math.sin(dLong / 2) *
+      Math.sin(dLong / 2);
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   var d = R * c;
   return d; // returns the distance in meter
