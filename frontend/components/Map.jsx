@@ -126,11 +126,12 @@ class Map extends Component {
           marker.bar = bar;
 
           this.props.markers.push(marker);
-
+          
           const infoWindowContent = `
             <div>${bar.name}</div>
             <div>Rating: ${bar.rating}</div>
             <div>Price level: ${bar.price_level}</div>
+            <div>Open now: ${bar.open_now? `Yes` : `No`}</div>
           `;
 
           const infoWindow = new google.maps.InfoWindow({
