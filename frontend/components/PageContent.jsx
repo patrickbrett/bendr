@@ -18,10 +18,12 @@ class PageContent extends Component {
       isAddMode: true,
       isOrdered: false,
       searchTerm: "",
+      prevSearchTerm: "",
       cameraPosition: {
         lat: 0,
         lng: 0
-      }
+      },
+      hangoverMode: false
     };
 
     this.moveCamera = (callback) => {
@@ -30,18 +32,17 @@ class PageContent extends Component {
       )
         .then(res => {
           res.json().then(json => {
-            this.setState({ cameraPosition: json.results[0].geometry.location,  }, callback);
+            this.setState({ cameraPosition: json.results[0].geometry.location, chosenBars: [], prevSearchTerm: this.state.searchTerm }, callback);
           });
         })
         .catch(err => console.log(err));
     };
 
     this.retrieveBars = () => {
-      console.log(this.state.cameraPosition);
       fetch(
         `/service/bars/?lat=${encodeURIComponent(
           this.state.cameraPosition.lat
-        )}&lng=${encodeURIComponent(this.state.cameraPosition.lng)}`
+        )}&lng=${encodeURIComponent(this.state.cameraPosition.lng)}&hangoverMode=${this.state.hangoverMode}`
       )
         .then(res => {
           res.json().then(json => {
@@ -53,7 +54,16 @@ class PageContent extends Component {
     };
 
     this.performSearch = () => {
-      this.moveCamera(this.retrieveBars);
+      const callback = ()=>this.moveCamera(this.retrieveBars);
+      if (this.state.searchTerm === "im hungover") {
+        this.removeAll();
+        this.setState({hangoverMode: true, searchTerm: this.state.prevSearchTerm}, callback);
+      } else if (this.state.searchTerm === "more alcohol please") {
+        this.removeAll();
+        this.setState({hangoverMode: false, searchTerm: this.state.prevSearchTerms}, callback);
+      } else {
+        callback();
+      }
     };
 
     this.toggleAddMode = () => {
@@ -106,11 +116,9 @@ class PageContent extends Component {
         this.setState(prevState => {
           let newChosenBars = Array.from(prevState.availableBars).sort(()=>Math.random()-0.5).slice(0, 5);
           this.markers.forEach(marker => {
-            newChosenBars.forEach(bar => {
-              if (marker.bar === bar) {
-                marker.setIcon("assets/icon.png");
+              if (newChosenBars.includes(marker.bar)) {
+                marker.setIcon("assets/iconWhite.png");
               }
-            });
           });
           return { chosenBars: newChosenBars };
         });
@@ -140,7 +148,6 @@ class PageContent extends Component {
 
   componentDidMount() {
     this.performSearch();
-    setTimeout(this.feelingLucky, 2000);
   }
 
   render() {
@@ -155,6 +162,7 @@ class PageContent extends Component {
           markers={this.markers}
           lines={this.lines}
           cameraPosition={this.state.cameraPosition}
+          hangoverMode={this.state.hangoverMode}
         />
         <Search
           updateSearch={this.updateSearch}
@@ -168,6 +176,7 @@ class PageContent extends Component {
           isAddMode={this.state.isAddMode}
           toggleAddMode={this.toggleAddMode}
           removeBar={this.removeBar}
+          feelingLucky={this.feelingLucky}
         />
       </div>
     );

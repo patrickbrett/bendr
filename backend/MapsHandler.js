@@ -14,19 +14,17 @@ const MapsHandler = {
     ).then(fetchRes => {
       fetchRes.json().then(json => {
         const { lat, lng } = json.results[0].geometry.location;
-        console.log(json);
         res.send(json);
       });
     });
   },
   loadBars: (req, res, next) => {
-    let { lat, lng } = req.query;
+    let { lat, lng, hangoverMode } = req.query;
 
     fetch(
-      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${apiKey}&radius=3000&location=${lat},${lng}&keyword=bar`
+      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${apiKey}&radius=3000&location=${lat},${lng}&keyword=${hangoverMode === "true" ? "cafe" : "bar"}`
     ).then(fetchRes => {
       fetchRes.json().then(json => {
-        console.log(json);
         res.send(json);
       });
     });
