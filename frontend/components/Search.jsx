@@ -9,6 +9,8 @@ class Search extends Component {
 
     return (
       <div id="searchContainer">
+        <input className = "searchBar" type="text" onChange={this.props.updateSearch} />
+        <button className = "searchButton" onClick={this.props.performSearch}>Go</button>
         <form onSubmit={submit}>
           <input type="text" onChange={this.props.updateSearch} />
         </form>
