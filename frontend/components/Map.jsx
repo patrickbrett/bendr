@@ -4,8 +4,6 @@ class Map extends Component {
   constructor(props) {
     super(props);
 
-    this.polyline = null;
-
     this.mapStylesDark = [
         { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
         {
@@ -187,16 +185,15 @@ class Map extends Component {
       }
     };
 
-    this.refreshLines = () => {
+    this.refreshLines = (removeLine = false) => {
       const lineCoords = this.props.chosenBars.map(bar => bar.geometry.location);
       const lineSymbol = {
         path: 'M 0,-1 0,1',
         strokeOpacity: 1,
         scale: 4
       };
-      console.log(lineCoords);
-      if (this.polyline) this.polyline.setMap(null);
-      this.polyline = new google.maps.Polyline(
+      if (this.props.polylines[0]) this.props.polylines[0].setMap(null);
+      this.props.polylines[0] = new google.maps.Polyline(
         {
           path: lineCoords,
           geodesic: true,
@@ -210,7 +207,7 @@ class Map extends Component {
           strokeWeight: 2
         }
       );
-      this.polyline.setMap(this.map);
+      if (!removeLine) this.props.polylines[0].setMap(this.map);
     };
 
     this.toggleDarkTheme = () => {
@@ -253,8 +250,7 @@ class Map extends Component {
       JSON.stringify(prevProps.chosenBars) !==
       JSON.stringify(this.props.chosenBars) || this.props.isOrdered && !prevProps.isOrdered
     ) {
-      console.log("here");
-      this.refreshLines();
+      this.refreshLines(this.props.chosenBars.length < prevProps.chosenBars.length);
     }
 
     if (JSON.stringify(prevProps.cameraPosition) !==
