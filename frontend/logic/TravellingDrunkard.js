@@ -135,7 +135,7 @@ class Graph {
       if (withLogs) console.log(currentTour + "\n");
     }
     tourList.sort((a, b) => a.weight - b.weight);
-    tourList = tourList.slice(0, 10); // top 10 lowest weight
+    tourList = tourList[0]; // only select lowest weight solution
     let tourListNamed = tourList.map(tour => {
       tour.tourNames = tour.tour.map(node => {
         return this.nodeNames[node];
@@ -251,14 +251,17 @@ class Graph {
     }
     console.log(`${pathList.length} paths found from ${i} attempts.`);
     pathList.sort((a, b) => a.weight - b.weight);
-    pathList = pathList.slice(0, 10); // top 10 lowest weight
+    pathList = [pathList[0]]; // only select lowest weight solution
     let pathListNamed = pathList.map(path => {
       path.pathNames = path.path.map(node => {
         return this.nodeNames[node];
       });
       return path;
     });
-    console.log(pathListNamed);
+
+    pathList = pathList[0];
+
+    return pathListNamed;
   }
 }
 
@@ -280,62 +283,6 @@ class Edge {
   }
 }
 
-/*let ausCities = new Graph();
-
-let sydney = new Node();
-ausCities.addNode(sydney, "Sydney");
-let melbourne = new Node();
-ausCities.addNode(melbourne, "Melbourne");
-let brisbane = new Node();
-ausCities.addNode(brisbane, "Brisbane");
-let perth = new Node();
-ausCities.addNode(perth, "Perth");
-let adelaide = new Node();
-ausCities.addNode(adelaide, "Adelaide");
-let canberra = new Node();
-ausCities.addNode(canberra, "Canberra");
-let hobart = new Node();
-ausCities.addNode(hobart, "Hobart");
-let darwin = new Node();
-ausCities.addNode(darwin, "Darwin");
-
-ausCities.addEdge(sydney, melbourne, 878);
-ausCities.addEdge(sydney, brisbane, 916);
-ausCities.addEdge(sydney, perth, 3934);
-ausCities.addEdge(sydney, adelaide, 1375);
-ausCities.addEdge(sydney, canberra, 293);
-ausCities.addEdge(sydney, hobart, 1595);
-ausCities.addEdge(sydney, darwin, 3977);
-
-ausCities.addEdge(melbourne, brisbane, 1680);
-ausCities.addEdge(melbourne, perth, 3406);
-ausCities.addEdge(melbourne, adelaide, 727);
-ausCities.addEdge(melbourne, canberra, 663);
-ausCities.addEdge(melbourne, hobart, 720);
-ausCities.addEdge(melbourne, darwin, 3741);
-
-ausCities.addEdge(brisbane, perth, 4317);
-ausCities.addEdge(brisbane, adelaide, 2022);
-ausCities.addEdge(brisbane, canberra, 1190);
-ausCities.addEdge(brisbane, hobart, 2402);
-ausCities.addEdge(brisbane, darwin, 3427);
-
-ausCities.addEdge(perth, adelaide, 2691);
-ausCities.addEdge(perth, canberra, 3718);
-ausCities.addEdge(perth, hobart, 4130);
-ausCities.addEdge(perth, darwin, 4027);
-
-ausCities.addEdge(adelaide, canberra, 1159);
-ausCities.addEdge(adelaide, hobart, 1438);
-ausCities.addEdge(adelaide, darwin, 3032);
-
-ausCities.addEdge(canberra, hobart, 1380);
-ausCities.addEdge(canberra, darwin, 3936);
-
-ausCities.addEdge(hobart, darwin, 4453);
-
-ausCities.printHamiltonianPaths(false);*/
-
 const TravellingDrunkard = {
   calculateRoute: (bars) => {
 
@@ -356,7 +303,7 @@ const TravellingDrunkard = {
       }
     }
 
-    barGraph.printHamiltonianPaths(false);
+    return barGraph.printHamiltonianPaths(false);
   }
 };
 

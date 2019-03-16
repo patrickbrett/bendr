@@ -61,7 +61,9 @@ class PageContent extends Component {
     };
 
     this.calculateRoute = () => {
-      TravellingDrunkard.calculateRoute(this.state.chosenBars);
+      const route = TravellingDrunkard.calculateRoute(this.state.chosenBars);
+
+      console.log(route);
     };
 
     this.bendMe = () => {
