@@ -10,7 +10,7 @@ class Map extends Component {
       if (window.google) {
         this.map = new window.google.maps.Map(document.getElementById("map"), {
           center: { lat: -37.813762, lng: 144.970467 },
-          zoom: 16,
+          zoom: 14,
           mapTypeId: "roadmap",
           disableDefaultUI: true,
           gestureHandling: "greedy",
@@ -107,7 +107,7 @@ class Map extends Component {
     };
 
     this.refreshMap = () => {
-      const { availableBars, chosenBars } = this.props;
+      const { availableBars } = this.props;
 
       const infoWindows = [];
 
@@ -140,7 +140,7 @@ class Map extends Component {
               if (this.props.chosenBars.includes(bar)) {
                 this.props.removeBar(bar);
                 marker.setIcon("assets/icon.png");
-              } else {
+              } else if (this.props.chosenBars.length < 7) {
                 this.props.chooseBar(bar);
                 marker.setIcon("assets/iconWhite.png");
               }
@@ -156,24 +156,36 @@ class Map extends Component {
             }
           });
         });
+
+        // this.forceUpdate();
       } else {
         setTimeout(this.refreshMap, 200);
       }
     };
 
+    this.updateCameraPosition = () => {
+      if (this.map) {
+        this.props.markers.forEach(marker => {
+          marker.setMap(null);
+        });
+
+        this.map.panTo(this.props.cameraPosition);
+      }
+    };
+
     this.refreshLines = () => {
-      const lineCoords = this.props.chosenBars.map(bar => bar.geometry.location);
+      const lineCoords = this.props.chosenBars.map(
+        bar => bar.geometry.location
+      );
       console.log(lineCoords);
       if (this.polyline) this.polyline.setMap(null);
-      this.polyline = new google.maps.Polyline(
-        {
-          path: lineCoords,
-          geodesic: true,
-          strokeColor: '#fff',
-          strokeOpacity: 1,
-          strokeWeight: 2
-        }
-      );
+      this.polyline = new google.maps.Polyline({
+        path: lineCoords,
+        geodesic: true,
+        strokeColor: "#fff",
+        strokeOpacity: 1,
+        strokeWeight: 2
+      });
       this.polyline.setMap(this.map);
     };
   }
@@ -195,6 +207,11 @@ class Map extends Component {
       JSON.stringify(this.props.chosenBars)
     ) {
       this.refreshLines();
+    }
+
+    if (JSON.stringify(prevProps.cameraPosition) !==
+      JSON.stringify(this.props.cameraPosition)) {
+      this.updateCameraPosition();
     }
   }
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Map from "./Map.jsx";
+import Search from "./Search.jsx";
 import List from "./List.jsx";
 import { apiKey } from "../apiKey.json";
 const TravellingDrunkard = require("../logic/TravellingDrunkard");
@@ -14,12 +15,34 @@ class PageContent extends Component {
     this.state = {
       chosenBars: [],
       availableBars: [],
-      isAddMode: false,
-      isOrdered: false
+      isAddMode: true,
+      isOrdered: false,
+      searchTerm: "",
+      cameraPosition: {
+        lat: 0,
+        lng: 0
+      }
+    };
+
+    this.moveCamera = (callback) => {
+      fetch(
+        `/service/camera/?searchTerm=${encodeURIComponent(this.state.searchTerm)}`
+      )
+        .then(res => {
+          res.json().then(json => {
+            this.setState({ cameraPosition: json.results[0].geometry.location,  }, callback);
+          });
+        })
+        .catch(err => console.log(err));
     };
 
     this.retrieveBars = () => {
-      fetch(`/service/bars`)
+      console.log(this.state.cameraPosition);
+      fetch(
+        `/service/bars/?lat=${encodeURIComponent(
+          this.state.cameraPosition.lat
+        )}&lng=${encodeURIComponent(this.state.cameraPosition.lng)}`
+      )
         .then(res => {
           res.json().then(json => {
             console.log("done", json.results);
@@ -29,19 +52,25 @@ class PageContent extends Component {
         .catch(err => console.log(err));
     };
 
+    this.performSearch = () => {
+      this.moveCamera(this.retrieveBars);
+    };
+
     this.toggleAddMode = () => {
-      this.setState(prevState => ({
-        isAddMode: !prevState.isAddMode
-      }));
+      this.setState(prevState => {
+        return {
+          isAddMode: !prevState.isAddMode
+        };
+      });
     };
 
     this.chooseBar = bar => {
       this.setState(prevState => {
-        const { chosenBars } = prevState;
-        if (!chosenBars.includes(bar)) {
+        let { chosenBars, isAddMode } = prevState;
+        if (!chosenBars.includes(bar) && chosenBars.length <= 7) {
           chosenBars.push(bar);
         }
-        return { chosenBars: chosenBars };
+        return { chosenBars, isAddMode };
       });
     };
 
@@ -83,10 +112,15 @@ class PageContent extends Component {
         };
       });
     };
+
+    this.updateSearch = e => {
+      let value = e.target.value;
+      this.setState(prevState => ({ searchTerm: value }));
+    };
   }
 
   componentDidMount() {
-    this.retrieveBars();
+    this.performSearch();
   }
 
   render() {
@@ -100,6 +134,12 @@ class PageContent extends Component {
           isAddMode={this.state.isAddMode}
           markers={this.markers}
           lines={this.lines}
+          cameraPosition={this.state.cameraPosition}
+        />
+        <Search
+          updateSearch={this.updateSearch}
+          searchTerm={this.state.searchTerm}
+          performSearch={this.performSearch}
         />
         <List
           chosenBars={this.state.chosenBars}

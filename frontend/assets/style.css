@@ -102,3 +102,16 @@ html, body {
     background: #ffb2b2;
     cursor: pointer;
 }
+
+#searchContainer {
+    position: absolute;
+    top: 10vh;
+    left: 5vh;
+    line-height: 2;
+    width: 25vw;
+    height: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    opacity: 0.9;
+}
