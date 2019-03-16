@@ -11,6 +11,7 @@ html, body {
     z-index: 10;
     overflow: auto;
     color: #fff;
+    box-shadow: 10px 10px 8px #000;
     text-align: center;
     position: absolute;
 }
@@ -132,6 +133,7 @@ html, body {
     cursor: pointer;
     border: none;
     border-radius: 5px;
+    right: 20px;
 }
 
 .feelingLuckyButton:hover{
@@ -164,7 +166,7 @@ animation: rainbow 5s infinite;
     cursor: pointer;
 }
 
-.addButton:focus, .bendMeButton:focus, .removeAllButton:focus {
+.addButton:focus, .bendMeButton:focus, .removeAllButton:focus, .feelingLuckyButton:focus {
     outline: none;
 }
 
