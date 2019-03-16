@@ -11,3 +11,4 @@
   - When you want to merge to master, first merge FROM master into your branch then create a Pull Request on Github
     - This is so that if the master branch has changed you will include the changes in your commit
   - Once you're made a PR, tell another team member about it so they can do a quick code review
+- **Don't push to master, work on a separate branch and then merge**
