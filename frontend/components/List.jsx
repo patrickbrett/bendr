@@ -13,6 +13,7 @@ class List extends Component {
     return (
       <div id="barList">
         <button onClick={this.props.toggleAddMode} className={`addButton` + (this.props.isAddMode ? ` isAddMode` : ``)}>Add</button>
+        <button onClick={this.props.removeAll} className={`removeAllButton`}>Clear</button>
         {chosenBarsDisplay}
         <button onClick={this.props.bendMe} className={`bendMeButton`}>Bend Me!</button>
       </div>

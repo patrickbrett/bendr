@@ -111,6 +111,8 @@ class Map extends Component {
             icon: "assets/icon.png"
           });
 
+          this.props.markers.push(marker);
+
           const infoWindowContent = `
             <div>${bar.name}</div>
             <div>Rating: ${bar.rating}</div>
@@ -155,7 +157,7 @@ class Map extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (JSON.stringify(prevProps.availableBars) !== JSON.stringify(this.props.availableBars)) { //calling stringify every render - bad idea?
+    if (JSON.stringify(prevProps.availableBars) !== JSON.stringify(this.props.availableBars)) {
       console.log(prevProps, this.props);
       this.refreshMap();
     }

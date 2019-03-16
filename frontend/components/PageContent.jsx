@@ -8,6 +8,8 @@ class PageContent extends Component {
   constructor(props) {
     super(props);
 
+    this.markers = [];
+
     this.state = {
       chosenBars: [],
       availableBars: [],
@@ -50,6 +52,13 @@ class PageContent extends Component {
         return { chosenBars: chosenBars };
       });
     };
+
+    this.removeAll = () => {
+      this.markers.forEach(marker => {
+        marker.setIcon("assets/icon.png");
+      });
+      this.setState({ chosenBars: [] });
+    };
   }
 
   componentDidMount() {
@@ -59,8 +68,8 @@ class PageContent extends Component {
   render() {
     return (
       <div id="pageContent">
-        <Map availableBars={this.state.availableBars} chosenBars={this.state.chosenBars} chooseBar={this.chooseBar} removeBar={this.removeBar} isAddMode={this.state.isAddMode} />
-        <List chosenBars={this.state.chosenBars} isAddMode={this.state.isAddMode} toggleAddMode={this.toggleAddMode} removeBar={this.removeBar} />
+        <Map availableBars={this.state.availableBars} chosenBars={this.state.chosenBars} chooseBar={this.chooseBar} removeBar={this.removeBar} isAddMode={this.state.isAddMode} markers={this.markers} />
+        <List chosenBars={this.state.chosenBars} removeAll={this.removeAll} isAddMode={this.state.isAddMode} toggleAddMode={this.toggleAddMode} removeBar={this.removeBar} />
       </div>
     );
   }
