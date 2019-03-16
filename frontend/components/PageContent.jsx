@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Map from "./Map.jsx";
-import Form from "./List.jsx";
 import List from "./List.jsx";
 import data from "../assets/data.json";
 import { apiKey } from "../apiKey.json";
@@ -25,9 +24,12 @@ class PageContent extends Component {
     };
 
     this.chooseBar = (bar) => {
+      console.log("here", bar);
       this.setState(prevState => {
         const { chosenBars } = prevState;
-        chosenBars.push(bar);
+        if (!chosenBars.includes(bar)) {
+          chosenBars.push(bar);
+        }
         return { chosenBars: chosenBars };
       })
     }
@@ -40,9 +42,8 @@ class PageContent extends Component {
   render() {
     return (
       <div id="pageContent">
-        <Map availableBars={this.state.availableBars} addBar={this.chooseBar} />
-        <Form />
-        <List />
+        <Map availableBars={this.state.availableBars} chooseBar={this.chooseBar} />
+        <List chosenBars={this.state.chosenBars} />
       </div>
     );
   }

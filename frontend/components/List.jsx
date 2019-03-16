@@ -2,18 +2,17 @@ import React, { Component } from "react";
 
 class List extends Component {
   render() {
+    const chosenBars = this.props.chosenBars;
+
+    const chosenBarsDisplay = chosenBars.map(bar => {
+      return (
+        <div>{bar.name}</div>
+      );
+    });
+
     return (
       <div id="barList">
-        <div className="formComponent">
-          <input type="text" id="location" placeholder="Enter location..." />
-        </div>
-        <div className="formComponent">
-          <input
-            type="text"
-            id="instrument"
-            placeholder="Enter instrument..."
-          />
-        </div>
+        {chosenBarsDisplay}
       </div>
     );
   }
