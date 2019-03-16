@@ -103,7 +103,7 @@ class Map extends Component {
 
       const infoWindows = [];
 
-      if (availableBars) {
+      if (availableBars && window.google) {
         availableBars.forEach(bar => {
           const marker = new google.maps.Marker({
             position: bar.geometry.location,
