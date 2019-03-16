@@ -6,3 +6,4 @@
 * fix render bug (react not updating)
 * remove white line when camera pans
 * I'm feeling lucky
+* set width of 'Add, Clear' box to auto when no entries present
