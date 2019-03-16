@@ -110,7 +110,11 @@ class PageContent extends Component {
           }
         });
         console.log(this.polylines);
-        this.polylines[0].setMap(null);
+        console.log(this.polylines.length == 0)
+        if (this.polylines.length !== 0)
+        {
+          this.polylines[0].setMap(null);
+        }
         return { chosenBars: chosenBars, isOrdered: false };
       });
     };

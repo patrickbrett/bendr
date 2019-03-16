@@ -88,7 +88,7 @@ class Map extends Component {
           elementType: "labels.text.stroke",
           stylers: [{ color: "#17263c" }]
         }
-      ]
+      ];
 
     this.initMap = () => {
       if (window.google) {
@@ -192,7 +192,7 @@ class Map extends Component {
         strokeOpacity: 1,
         scale: 4
       };
-      if (this.props.polylines[0]) this.props.polylines[0].setMap(null);
+     if (this.props.polylines[0]) this.props.polylines[0].setMap(null);
       this.props.polylines[0] = new google.maps.Polyline(
         {
           path: lineCoords,
@@ -227,7 +227,7 @@ class Map extends Component {
         marker.setMap(null);
       });
       this.map.setOptions({ styles: currentOptions.styles});
-    }
+    };
   }
 
   componentDidMount() {
