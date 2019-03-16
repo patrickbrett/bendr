@@ -23,6 +23,14 @@ class PageContent extends Component {
         })
         .catch(err => console.log(err));
     };
+
+    this.chooseBar = (bar) => {
+      this.setState(prevState => {
+        const { chosenBars } = prevState;
+        chosenBars.push(bar);
+        return { chosenBars: chosenBars };
+      })
+    }
   }
 
   componentDidMount() {
@@ -32,7 +40,7 @@ class PageContent extends Component {
   render() {
     return (
       <div id="pageContent">
-        <Map availableBars={this.state.availableBars} />
+        <Map availableBars={this.state.availableBars} addBar={this.chooseBar} />
         <Form />
         <List />
       </div>

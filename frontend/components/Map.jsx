@@ -60,6 +60,7 @@ class Map extends Component {
             if (infoWindow.isOpen) {
               infoWindow.close(this.map, marker);
               infoWindow.isOpen = false;
+              this.props.chooseBar(bar);
             } else {
               infoWindow.open(this.map, marker);
               infoWindow.isOpen = true;
