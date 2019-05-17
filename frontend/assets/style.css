@@ -41,13 +41,26 @@ html, body {
     margin-top: 10px;
     -webkit-transition: -webkit-transform .8s ease-in-out;
     -ms-transition: -ms-transform .8s ease-in-out;
-    transition: transform .8s ease-in-out;
+    transform: scale(1);
+    transition: 1s all;
 }
 
 #logo:hover{
-    transform:rotate(360deg);
-    -ms-transform:rotate(360deg);
-    -webkit-transform:rotate(360deg);
+    animation: bend 1s ease-in-out;
+    /*-ms-transform:rotate(360deg);*/
+    /*-webkit-transform:rotate(360deg);*/
+}
+
+@keyframes bend {
+    0% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform:scale(1.5, 0.8);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
 }
 
 #map {
