@@ -1,3 +1,3 @@
 Made for UniHack 2019.
 
-https://patrickbrett.net/bendr
+(live demo development still in progress; this is not fully functional) https://patrickbrett.net/bendr
